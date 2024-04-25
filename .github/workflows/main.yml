@@ -22,10 +22,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      
       - name: Install Anypoint CLI
         run: npm install -g anypoint-cli-v4
 
       # Automation using Any CLI
       - name: Apply API Manager Policy
-        run: anypoint-cli-v4 api-mgr:policy:apply --config '{"rateLimits": [{ "maximumRequests": 3, "timePeriodInMilliseconds": 60000 }], "clusterizable": true, "exposeHeaders": false }' 19445712 rate-limiting --policyVersion 1.4.0 --client_id c5d62935023743a584feaadfc89b452a --client_secret 25D0Be5921724801a4fA7d42074a1203 --environment Sandbox
+        run: >
+          anypoint-cli-v4 api-mgr:policy:apply --config '{"rateLimits": [{
+          "maximumRequests": 3, "timePeriodInMilliseconds": 60000 }],
+          "clusterizable": true, "exposeHeaders": false }' 19445712
+          rate-limiting --policyVersion 1.4.0 --client_id
+          c5d62935023743a584feaadfc89b452a --client_secret
+          25D0Be5921724801a4fA7d42074a1203 --environment Sandbox
